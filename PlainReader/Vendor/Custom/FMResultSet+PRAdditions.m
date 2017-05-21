@@ -24,12 +24,15 @@
     PRArticle *article = [[PRArticle alloc] init];
     article.articleId = [self numberForColumnName:@"id"];
     article.title = [self stringForColumn:@"title"];
+    article.category = [self stringForColumn:@"category"];
     article.source = [self stringForColumn:@"source"];
     article.summary = [self stringForColumn:@"summary"];
     article.pubTime = [self stringForColumn:@"pubtime"];
     article.content = [self stringForColumn:@"content"];
     article.commentCount = [self numberForColumnName:@"cmt_count"];
     article.sn = [self stringForColumn:@"sn"];
+    article.csrf_token = [self stringForColumn:@"csrf_token"];
+    article.comment_csrf = [self stringForColumn:@"comment_csrf"];
     article.thumb = [self stringForColumn:@"thumb"];
     article.read = [self numberForColumnName:@"is_read"];
     article.cacheStatus = [self numberForColumnName:@"cache_status"];
@@ -41,8 +44,11 @@
     PRArticle *article = [[PRArticle alloc] init];
     article.articleId = [self numberForColumnName:@"id"];
     article.title = [self stringForColumn:@"title"];
+    article.category = [self stringForColumn:@"category"];
     article.pubTime = [self stringForColumn:@"pubtime"];
     article.commentCount = [self numberForColumnName:@"cmt_count"];
+    article.csrf_token = [self stringForColumn:@"csrf_token"];
+    article.comment_csrf = [self stringForColumn:@"comment_csrf"];
     article.thumb = [self stringForColumn:@"thumb"];
     article.read = [self numberForColumnName:@"is_read"];
     article.cacheStatus = [self numberForColumnName:@"cache_status"];

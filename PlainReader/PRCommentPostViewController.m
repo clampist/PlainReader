@@ -212,7 +212,7 @@
     [self showLoading];
     
     if (self.comment) {
-        [[PRHTTPFetcher fetcher] replyComment:self.comment content:content securityCode:[self.textField text] done:^(CWHTTPFetcher *fetcher, NSError *error) {
+        [[PRHTTPFetcher fetcher] replyComment:self.comment content:content securityCode:[self.textField text] article:self.article done:^(CWHTTPFetcher *fetcher, NSError *error) {
             [self stopLoading];
             
             if (error) {

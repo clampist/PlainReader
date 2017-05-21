@@ -18,12 +18,15 @@ typedef NS_ENUM(NSUInteger, PRArticleCacheStatus) {
 
 @property (nonatomic, copy) NSNumber *articleId;
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *category;
 @property (nonatomic, copy) NSString *source;
 @property (nonatomic, copy) NSString *summary;
 @property (nonatomic, copy) NSString *pubTime;
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSNumber *commentCount;
 @property (nonatomic, copy) NSString *sn;
+@property (nonatomic, copy) NSString *csrf_token;
+@property (nonatomic, copy) NSString *comment_csrf;
 @property (nonatomic, copy) NSString *thumb;
 @property (nonatomic, copy) NSNumber *read;
 @property (nonatomic, copy) NSNumber *cacheStatus;

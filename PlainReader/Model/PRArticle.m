@@ -35,7 +35,7 @@
         return _formattedTime;
     }
     
-    if (!self.pubTime || [self.pubTime length] < 19) {
+    if (!self.pubTime || [self.pubTime length] < 16) {
         return @"";
     }
     
@@ -163,7 +163,7 @@
             }
         }
     }
-    html = [html stringByReplacingOccurrencesOfString:kOriginPlaceholder withString:[NSString stringWithFormat:@"http://www.cnbeta.com/articles/%@.htm", self.articleId]];
+    html = [html stringByReplacingOccurrencesOfString:kOriginPlaceholder withString:[NSString stringWithFormat:@"http://www.cnbeta.com/articles/%@/%@.htm", self.category, self.articleId]];
     return html;
 }
 

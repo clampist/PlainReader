@@ -33,15 +33,14 @@ PODS:
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
   - hpple (0.2.0)
-  - JDStatusBarNotification (1.5.4)
+  - JDStatusBarNotification (1.5.5)
   - pop (1.0.9)
 
 DEPENDENCIES:
   - AFNetworking
   - CocoaLumberjack (= 1.9.2)
   - CWFoundation (from `https://github.com/guojiubo/CWFoundation.git`, commit `2352449291499091f4e4a82877ec57c9070ced35`)
-  - CWStackController (from `https://github.com/guojiubo/CWStackController.git`, commit
-    `8ff182c2f4e6b4cc31b9357f2a31f6bde456ef87`)
+  - CWStackController (from `https://github.com/guojiubo/CWStackController.git`, commit `8ff182c2f4e6b4cc31b9357f2a31f6bde456ef87`)
   - FLAnimatedImage
   - FMDB
   - hpple
@@ -72,7 +71,9 @@ SPEC CHECKSUMS:
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   hpple: 3b765f96fc2cd56ad1a49aef6f7be5cb2aa64b57
-  JDStatusBarNotification: d47dded0594a50a39c84a2cc5aa356fcf6750d0e
+  JDStatusBarNotification: 2b4f29bd68a60d7aa2f190b5265f1ce59c18aaf8
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: ff73e6895f4633755ff695bcf01a1ef21d2db448
+
+COCOAPODS: 1.2.1

@@ -113,10 +113,10 @@
 {
     NSString *sql = nil;
     if (lastArticle) {
-        sql = [NSString stringWithFormat:@"SELECT id, title, pubtime, cmt_count, thumb, is_read, cache_status FROM article WHERE id < %@ AND (pubtime IS NOT NULL OR pubtime != '') ORDER BY id DESC LIMIT %@", lastArticle.articleId, [@(limit) stringValue]];
+        sql = [NSString stringWithFormat:@"SELECT id, title, category, pubtime, cmt_count, csrf_token, comment_csrf, thumb, is_read, cache_status FROM article WHERE id < %@ AND (pubtime IS NOT NULL OR pubtime != '') ORDER BY id DESC LIMIT %@", lastArticle.articleId, [@(limit) stringValue]];
     }
     else {
-        sql = [NSString stringWithFormat:@"SELECT id, title, pubtime, cmt_count, thumb, is_read, cache_status FROM article WHERE (pubtime IS NOT NULL OR pubtime != '') ORDER BY id DESC LIMIT %@", [@(limit) stringValue]];
+        sql = [NSString stringWithFormat:@"SELECT id, title, category, pubtime, cmt_count, csrf_token, comment_csrf, thumb, is_read, cache_status FROM article WHERE (pubtime IS NOT NULL OR pubtime != '') ORDER BY id DESC LIMIT %@", [@(limit) stringValue]];
     }
     
     NSMutableArray *results = [[NSMutableArray alloc] init];
@@ -205,22 +205,22 @@
     NSMutableArray *recommends = [[NSMutableArray alloc] init];
     
     [self.dbQueue inDatabase:^(FMDatabase *db) {
-        FMResultSet *s = [db executeQuery:@"SELECT * FROM weekly WHERE type = ? ORDER BY article_id DESC", @(PRWeeklyTypeHot)];
+        FMResultSet *s = [db executeQuery:@"SELECT * FROM weekly WHERE type = ? ORDER BY id ASC LIMIT 10", @(PRWeeklyTypeHot)];
         while ([s next]) {
             NSNumber *articleId = [s numberForColumnName:@"article_id"];
 
-            FMResultSet *ss = [db executeQuery:@"SELECT id, title, pubtime, cmt_count, thumb, is_read, cache_status FROM article WHERE id = ?", articleId];
+            FMResultSet *ss = [db executeQuery:@"SELECT id, title, category, pubtime, cmt_count, thumb, is_read, cache_status FROM article WHERE id = ?", articleId];
             while ([ss next]) {
                 PRArticle *article = [ss toRealtimeArticle];
                 [hots addObject:article];
             }
         }
         
-        s = [db executeQuery:@"SELECT * FROM weekly WHERE type = ? ORDER BY article_id DESC", @(PRWeeklyTypeRecommend)];
+        s = [db executeQuery:@"SELECT * FROM weekly WHERE type = ? ORDER BY id ASC LIMIT 10", @(PRWeeklyTypeRecommend)];
         while ([s next]) {
             NSNumber *articleId = [s numberForColumnName:@"article_id"];
             
-            FMResultSet *ss = [db executeQuery:@"SELECT id, title, pubtime, cmt_count, thumb, is_read, cache_status FROM article WHERE id = ?", articleId];
+            FMResultSet *ss = [db executeQuery:@"SELECT id, title, category, pubtime, cmt_count, thumb, is_read, cache_status FROM article WHERE id = ?", articleId];
             while ([ss next]) {
                 PRArticle *article = [ss toRealtimeArticle];
                 [recommends addObject:article];

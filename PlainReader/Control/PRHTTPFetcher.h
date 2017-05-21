@@ -26,12 +26,12 @@ extern NSString *const PRHTTPFetcherDidFetchCommentsNotification;
 
 - (void)fetchCommentsOfArticle:(PRArticle *)article done:(CWHTTPFetcherBlock)block;
 
-- (void)vote:(PRComment *)comment support:(BOOL)support done:(CWHTTPFetcherBlock)block;
+- (void)vote:(PRComment *)comment support:(BOOL)support article:(PRArticle *)article done:(CWHTTPFetcherBlock)block;
 
 - (void)fetchSecurityCodeForArticle:(PRArticle *)article done:(CWHTTPFetcherBlock)block;
 
 - (void)postCommentToArticle:(PRArticle *)article content:(NSString *)content securityCode:(NSString *)code done:(CWHTTPFetcherBlock)block;
 
-- (void)replyComment:(PRComment *)comment content:(NSString *)content securityCode:(NSString *)code done:(CWHTTPFetcherBlock)block;
+- (void)replyComment:(PRComment *)comment content:(NSString *)content securityCode:(NSString *)code article:(PRArticle *)article done:(CWHTTPFetcherBlock)block;
 
 @end

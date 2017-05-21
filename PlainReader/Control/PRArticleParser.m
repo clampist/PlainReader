@@ -17,24 +17,31 @@ NSString *const XPathQueryArticleImages = @"//div[@class=\"content\"]//img";
 {
     // 时间
     if (!article.pubTime) {
-        TFHppleElement *timeElement = [[hpple searchWithXPathQuery:@"//span[@class=\"date\"]"] firstObject];
-        article.pubTime = [timeElement text];
+        TFHppleElement *timeElement = [[hpple searchWithXPathQuery:@"//div[@class=\"meta\"]/span"] firstObject];
+        NSString *pubTime = [timeElement text];
+        if ([pubTime containsString:@"年"])
+            [pubTime stringByReplacingOccurrencesOfString:@"年" withString:@"-"];
+        if ([pubTime containsString:@"月"])
+            [pubTime stringByReplacingOccurrencesOfString:@"月" withString:@"-"];
+        if ([pubTime containsString:@"日"])
+            [pubTime stringByReplacingOccurrencesOfString:@"日" withString:@"-"];
+        article.pubTime = pubTime;
     }
     
     // 来源
-    TFHppleElement *sourceElement = [[hpple searchWithXPathQuery:@"//span[@class=\"where\"]/a"] firstObject];
+    TFHppleElement *sourceElement = [[hpple searchWithXPathQuery:@"//span[@class=\"source\"]/a/span"] firstObject];
     if (!sourceElement) {
-        sourceElement = [[hpple searchWithXPathQuery:@"//span[@class=\"where\"]"] firstObject];
+        sourceElement = [[hpple searchWithXPathQuery:@"//span[@class=\"source\"]/a"] firstObject];
     }
     article.source = sourceElement.text;
     
     // 摘要
-    TFHppleElement *summaryElement = [[hpple searchWithXPathQuery:@"//div[@class=\"introduction\"]/p"] lastObject];
+    TFHppleElement *summaryElement = [[hpple searchWithXPathQuery:@"//div[@class=\"article-summary\"]/p"] lastObject];
     NSString *summary = summaryElement.raw;
     article.summary = summary;
     
     // 内容
-    TFHppleElement *contentElement = [[hpple searchWithXPathQuery:@"//div[@class=\"content\"]"] firstObject];
+    TFHppleElement *contentElement = [[hpple searchWithXPathQuery:@"//div[@class=\"article-content\"]"] firstObject];
     NSString *content = [contentElement raw];
     if (content) {        
         // 去除内联样式
@@ -51,6 +58,13 @@ NSString *const XPathQueryArticleImages = @"//div[@class=\"content\"]//img";
         if ([match numberOfRanges] > 0) {
             NSString *sn = [wholeHTML substringWithRange:[match rangeAtIndex:1]];
             article.sn = sn;
+        }
+        
+        reg = [NSRegularExpression regularExpressionWithPattern:@"csrf-token\" content=\"([^\"]*)\"" options:NSRegularExpressionCaseInsensitive error:nil];
+        match = [reg firstMatchInString:wholeHTML options:0  range:NSMakeRange(0, wholeHTML.length)];
+        if (match.numberOfRanges > 0) {
+            NSString *ArticleToken = [wholeHTML substringWithRange:[match rangeAtIndex:1]];
+            article.csrf_token = ArticleToken;
         }
     }
 }

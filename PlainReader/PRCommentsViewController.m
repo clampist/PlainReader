@@ -137,7 +137,7 @@
 - (void)vote:(PRComment *)comment support:(BOOL)support
 {
     PRHTTPFetcher *fetcher = [PRHTTPFetcher fetcher];
-    [fetcher vote:comment support:support done:^(CWHTTPFetcher *fetcher, NSError *error) {
+    [fetcher vote:comment support:support article:self.article done:^(CWHTTPFetcher *fetcher, NSError *error) {
         [JDStatusBarNotification showSuccess:support ? @"支持++" : @"反对++"];
     }];
 }

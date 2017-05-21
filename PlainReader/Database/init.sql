@@ -6,12 +6,15 @@ DROP TABLE IF EXISTS starred;
 CREATE TABLE article (
 	id INTEGER PRIMARY KEY,
 	title TEXT,
+	category TEXT,
 	source TEXT,
 	summary TEXT,
 	pubtime TEXT,
 	content TEXT,
 	cmt_count INTEGER,
 	sn TEXT,
+	csrf_token TEXT,
+	comment_csrf TEXT,
 	thumb TEXT,
 	is_read INTEGER,
 	cache_status INTEGER
@@ -26,6 +29,7 @@ CREATE TABLE top_comment (
 );
 
 CREATE TABLE weekly (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
 	article_id INTEGER,
 	type INTEGER
 );

@@ -123,7 +123,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     PRSectionHeader *header = [[PRSectionHeader alloc] init];
-    [header setText:section == 0 ? @"热评资讯" : @"人气推荐"];
+    [header setText:section == 0 ? @"热门点击" : @"热门评论"];
     return header;
 }
 

@@ -30,6 +30,11 @@
         [arguments addObject:article.title];
         [bindingMark addObject:@"?"];
     }
+    if (article.category) {
+        [columns addObject:@"category"];
+        [arguments addObject:article.category];
+        [bindingMark addObject:@"?"];
+    }
     if (article.source) {
         [columns addObject:@"source"];
         [arguments addObject:article.source];
@@ -96,6 +101,10 @@
     if (article.title) {
         [columns addObject:@"title = ?"];
         [arguments addObject:article.title];
+    }
+    if (article.category) {
+        [columns addObject:@"category = ?"];
+        [arguments addObject:article.category];
     }
     if (article.source) {
         [columns addObject:@"source = ?"];
